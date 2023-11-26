@@ -1,7 +1,10 @@
 package com.ewa.project.model;
 
 import javax.validation.constraints.NotBlank;
+<<<<<<< HEAD
 import javax.validation.constraints.NotNull;
+=======
+>>>>>>> origin/main
 
 import com.ewa.project.entity.Cart;
 import com.ewa.project.entity.Seller;
@@ -16,7 +19,11 @@ public class ProductDto {
 	@NotBlank
 	private String productDescription;
 
+<<<<<<< HEAD
 	@NotNull
+=======
+	@NotBlank
+>>>>>>> origin/main
 	private double productPrice;
 
 	@NotBlank

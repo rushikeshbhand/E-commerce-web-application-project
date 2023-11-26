@@ -9,25 +9,42 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+<<<<<<< HEAD
 import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "Product_Details")
 public class Product {
 	
+=======
+
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+@Entity
+@Table(name = "Product_Details")
+public class Product {
+>>>>>>> origin/main
 	@Id
 	@Column(name = "product_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long productId;
 
+<<<<<<< HEAD
 	@NotBlank(message="product name should not be blank")
+=======
+	@NotBlank
+>>>>>>> origin/main
 	@Column(name = "product_name")
 	private String productName;
 
 	@Column(name = "product_description")
 	private String productDescription;
 
+<<<<<<< HEAD
 	@NotNull(message="product price should not be null")
+=======
+>>>>>>> origin/main
 	@Column(name = "product_price")
 	private double productPrice;
 
@@ -42,6 +59,7 @@ public class Product {
 
 	// relationships
 	@ManyToOne
+<<<<<<< HEAD
 	@JoinColumn(name = "cart_id") // This is the foreign key column in the products table
 	private Cart cart;
 
@@ -76,6 +94,19 @@ public class Product {
 		super();
 	}
 
+=======
+    @JoinColumn(name = "cart_id") // This is the foreign key column in the products table
+    private Cart cart;
+	
+	@ManyToOne
+    @JoinColumn(name = "category_id") // This is the foreign key column in the products table
+    private Category category;
+	
+	@ManyToOne
+    @JoinColumn(name = "seller_id") // This is the foreign key column in the products table
+    private Seller seller;
+	
+>>>>>>> origin/main
 	// getter and setter
 
 	public Cart getCart() {
@@ -86,6 +117,10 @@ public class Product {
 		return seller;
 	}
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/main
 	public void setSeller(Seller seller) {
 		this.seller = seller;
 	}

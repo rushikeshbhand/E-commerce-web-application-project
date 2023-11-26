@@ -11,6 +11,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
+<<<<<<< HEAD
+=======
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+>>>>>>> origin/main
 @Entity
 @Table(name = "Category_Details")
 public class Category {
@@ -27,6 +33,7 @@ public class Category {
 	// Relationships
 	@OneToMany(mappedBy = "category")
 	private List<Product> product;
+<<<<<<< HEAD
 
 	// All argument constructor
 	public Category(Long categoryId, @NotBlank String categoryName, List<Product> product) {
@@ -42,6 +49,12 @@ public class Category {
 	}
 
 	// getter and setter
+=======
+	
+	// getter and setter
+
+
+>>>>>>> origin/main
 	public Long getCategoryId() {
 		return categoryId;
 	}

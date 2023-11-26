@@ -10,6 +10,14 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+<<<<<<< HEAD
+=======
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+@AllArgsConstructor
+>>>>>>> origin/main
 @Entity
 @Table(name = "Admin_Details")
 public class Admin {
@@ -34,6 +42,7 @@ public class Admin {
 	@Size(min = 10, max = 10, message = "Contact number must have exactly 10 Numbers")
 	@Column(name = "admin_contact_number")
 	private String adminContact;
+<<<<<<< HEAD
 	
     //All argument constructor
 	public Admin(Long adminId, @NotBlank String adminUsername,
@@ -52,6 +61,8 @@ public class Admin {
 	public Admin() {
 		super();
 	}
+=======
+>>>>>>> origin/main
 
 	// getter and setter
 	public Long getAdminId() {

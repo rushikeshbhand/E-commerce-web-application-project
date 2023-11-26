@@ -11,6 +11,12 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+<<<<<<< HEAD
+=======
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+>>>>>>> origin/main
 @Entity
 @Table(name = "customer_details")
 public class Customer {
@@ -49,6 +55,7 @@ public class Customer {
 //	, referencedColumnName = "cart_id"
 	@OneToOne(mappedBy = "customer")
 	private Cart cart;
+<<<<<<< HEAD
 
 	// All argument constructor
 
@@ -74,6 +81,8 @@ public class Customer {
 		super();
 	}
 
+=======
+>>>>>>> origin/main
 	// getter and setter
 
 	public Long getCustomerId() {
