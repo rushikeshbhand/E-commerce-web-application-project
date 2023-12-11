@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,7 +23,7 @@ import com.ewa.project.service.CategoryService;
 				// response
 @RequestMapping("/api/categories") // The @RequestMapping annotation sets the starting address ("/api/categories")
 									// for all the operations this controller handle and any operations in this
-									// class will be based on this address
+@CrossOrigin("http://localhost:4200")					// class will be based on this address
 public class CategoryController {
 
 	@Autowired // Automatically inject an instance of CategoryService
@@ -46,12 +47,22 @@ public class CategoryController {
 	public CategoryDto getCategoryById(@PathVariable Long categoryId) {
 		return categoryService.getCategoryById(categoryId);
 	}
-
-	// handling updating category request
+	
 	@PutMapping("/{categoryId}")
-	public CategoryDto updateCategory(@PathVariable Long categoryId, @RequestBody CategoryDto categoryDto) {
-		return categoryService.updateCategory(categoryId, categoryDto);
+	public ResponseEntity<CategoryDto> updateCategory(@PathVariable Long categoryId, @RequestBody CategoryDto categoryDto) {
+	    CategoryDto updatedCategory = categoryService.updateCategory(categoryId, categoryDto);
+	    if (updatedCategory != null) {
+	        return ResponseEntity.ok(updatedCategory);
+	    } else {
+	        return ResponseEntity.notFound().build();
+	    }
 	}
+
+//	// handling updating category request
+//	@PutMapping("/{categoryId}")
+//	public CategoryDto updateCategory(@PathVariable Long categoryId, @RequestBody CategoryDto categoryDto) {
+//		return categoryService.updateCategory(categoryId, categoryDto);
+//	}
 
 	// handling deleting category request
 	@DeleteMapping("/{categoryId}")

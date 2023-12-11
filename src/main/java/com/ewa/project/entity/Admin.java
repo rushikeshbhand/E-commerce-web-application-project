@@ -10,14 +10,6 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-<<<<<<< HEAD
-=======
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-
-@NoArgsConstructor
-@AllArgsConstructor
->>>>>>> origin/main
 @Entity
 @Table(name = "Admin_Details")
 public class Admin {
@@ -25,10 +17,6 @@ public class Admin {
 	@Column(name = "admin_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long adminId;
-
-	@NotBlank
-	@Column(name = "admin_username")
-	private String adminUsername;
 
 	@NotBlank
 	@Size(min = 6, max = 20, message = "Password must be between 6 to 20 characters")
@@ -42,7 +30,6 @@ public class Admin {
 	@Size(min = 10, max = 10, message = "Contact number must have exactly 10 Numbers")
 	@Column(name = "admin_contact_number")
 	private String adminContact;
-<<<<<<< HEAD
 	
     //All argument constructor
 	public Admin(Long adminId, @NotBlank String adminUsername,
@@ -51,7 +38,6 @@ public class Admin {
 			@Size(min = 10, max = 10, message = "Contact number must have exactly 10 Numbers") String adminContact) {
 		super();
 		this.adminId = adminId;
-		this.adminUsername = adminUsername;
 		this.adminPassword = adminPassword;
 		this.adminEmail = adminEmail;
 		this.adminContact = adminContact;
@@ -61,8 +47,6 @@ public class Admin {
 	public Admin() {
 		super();
 	}
-=======
->>>>>>> origin/main
 
 	// getter and setter
 	public Long getAdminId() {
@@ -72,15 +56,7 @@ public class Admin {
 	public void setAdminId(Long adminId) {
 		this.adminId = adminId;
 	}
-
-	public String getAdminUsername() {
-		return adminUsername;
-	}
-
-	public void setAdminUsername(String adminUsername) {
-		this.adminUsername = adminUsername;
-	}
-
+	
 	public String getAdminPassword() {
 		return adminPassword;
 	}

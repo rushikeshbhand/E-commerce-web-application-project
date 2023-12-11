@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ewa.project.entity.Product;
 import com.ewa.project.model.ProductDto;
 import com.ewa.project.service.ProductService;
 
@@ -22,7 +24,7 @@ import com.ewa.project.service.ProductService;
 				// response
 @RequestMapping("/api/products") // The @RequestMapping annotation sets the starting address ("/api/products")
 									// for all the operations this controller handle and any operations in this
-									// class will be based on this address
+@CrossOrigin("http://localhost:4200")							// class will be based on this address
 public class ProductController {
 
 	@Autowired // automatically inject object of product service
@@ -34,6 +36,20 @@ public class ProductController {
 		ProductDto createdProduct = productService.createProduct(productDto);
 		return new ResponseEntity<>(createdProduct, HttpStatus.CREATED);
 	}
+	
+	@GetMapping("/searchProducts/{productName}")
+	public ResponseEntity<List<Product>> searchProductsByName(@PathVariable String productName) {
+	  List<Product> products = productService.searchProductsByName(productName);
+	  return ResponseEntity.ok(products);
+	}
+	
+	// Add a new endpoint for deleting by name
+	@DeleteMapping("/deleteProductByName/{productName}")
+	public ResponseEntity<Void> deleteProductByName(@PathVariable String productName) {
+	  productService.deleteProductByName(productName);
+	  return ResponseEntity.noContent().build();
+	}
+
 
 	// handling select all product request
 	@GetMapping("/getAllProducts")

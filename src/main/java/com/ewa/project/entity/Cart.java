@@ -10,14 +10,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-<<<<<<< HEAD
-=======
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-
-@AllArgsConstructor(staticName = "build")
-@NoArgsConstructor
->>>>>>> origin/main
 @Entity
 @Table(name = "Cart_Details")
 public class Cart {
@@ -34,7 +26,7 @@ public class Cart {
 
 	// Relationships
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "order_id")
 	private Order order;
 
@@ -42,10 +34,9 @@ public class Cart {
 	@JoinColumn(name = "payment_id") // This is the foreign key column in the carts table
 	private Payment payment;
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "customer_id") // This is the foreign key column in the carts table
 	private Customer customer;
-<<<<<<< HEAD
 	
 	//All argument constructor
 	public Cart(Long cartId, int quantity, double totalPrice, Order order, Payment payment, Customer customer) {
@@ -62,8 +53,6 @@ public class Cart {
 	public Cart() {
 		super();
 	}
-=======
->>>>>>> origin/main
 
 	// getter and setter
 
@@ -71,11 +60,8 @@ public class Cart {
 		return payment;
 	}
 
-<<<<<<< HEAD
 	
 
-=======
->>>>>>> origin/main
 	public void setPayment(Payment payment) {
 		this.payment = payment;
 	}

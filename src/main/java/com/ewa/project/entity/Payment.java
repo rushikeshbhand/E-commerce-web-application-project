@@ -9,12 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-<<<<<<< HEAD
-=======
-import lombok.NoArgsConstructor;
-
-@NoArgsConstructor
->>>>>>> origin/main
 @Entity
 @Table(name = "Payment_Details")
 public class Payment {
@@ -40,7 +34,6 @@ public class Payment {
 	@OneToOne(mappedBy = "payment", cascade= CascadeType.ALL) // payment refers to the field Order entity
 	private Order order;
 	
-<<<<<<< HEAD
 	// All argument constructor
 	
 	public Payment(Long paymentId, double paymentAmount, String paymentStatus, String paymentMethod, Order order) {
@@ -57,8 +50,6 @@ public class Payment {
 			super();
 		}
 
-=======
->>>>>>> origin/main
 	// getter and setter
 
 	public Long getPaymentId() {

@@ -1,5 +1,7 @@
 package com.ewa.project.controller;
 
+import com.ewa.project.config.AuthResponse;
+import com.ewa.project.config.JwtUtil;
 import com.ewa.project.model.CustomerDto;
 import com.ewa.project.service.CustomerService;
 
@@ -15,7 +17,7 @@ import java.util.List;
 				// response
 @RequestMapping("/api/customers") // The @RequestMapping annotation sets the starting address ("/api/customers")
 									// for all the operations this controller handle and any operations in this
-									// class will be based on this address
+@CrossOrigin("http://localhost:4200")									// class will be based on this address
 public class CustomerController {
 
 	@Autowired // automatically inject object of customer service
@@ -27,7 +29,27 @@ public class CustomerController {
 		CustomerDto createdCustomer = customerService.createCustomer(customerDto);
 		return new ResponseEntity<>(createdCustomer, HttpStatus.CREATED);
 	}
+	
+	@PostMapping("/signup")
+    public ResponseEntity<CustomerDto> signup(@RequestBody CustomerDto customerDto) {
+        CustomerDto createdCustomer = customerService.createCustomer(customerDto);
+        return new ResponseEntity<>(createdCustomer, HttpStatus.CREATED);
+    }
 
+    @PostMapping("/login")
+    public ResponseEntity<AuthResponse> login(@RequestBody CustomerDto customerDto) {
+        String email = customerDto.getCustomerEmail();
+        String password = customerDto.getCustomerPassword();
+
+        CustomerDto authenticatedCustomer = customerService.authenticateCustomer(email, password);
+        String token = JwtUtil.generateToken(authenticatedCustomer.getCustomerEmail());
+
+        AuthResponse authResponse = new AuthResponse();
+        authResponse.setToken(token);
+
+        return ResponseEntity.ok(authResponse);
+    }
+ 
 	// handling select all customer request
 	@GetMapping("/getAllCustomers")
 	public ResponseEntity<List<CustomerDto>> getAllCustomers() {
@@ -51,8 +73,13 @@ public class CustomerController {
 	}
 
 	// handling delete customer request
-	@DeleteMapping("/{customerId}")
-	public String deleteCustomer(@PathVariable Long customerId) {
-		return customerService.deleteCustomer(customerId);
+//	@DeleteMapping("/{customerId}")
+//	public String deleteCustomer(@PathVariable Long customerId) {
+//		return customerService.deleteCustomer(customerId);
+//	}
+	
+	@DeleteMapping("/{email}")
+	public String deleteCustomerByEmail(@PathVariable String email) {
+	    return customerService.deleteCustomerByEmail(email);
 	}
 }

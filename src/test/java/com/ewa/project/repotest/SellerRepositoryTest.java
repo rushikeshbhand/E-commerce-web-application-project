@@ -117,7 +117,6 @@ public class SellerRepositoryTest {
 
     private Seller createSampleSeller(String username, String password, String email, String contact, String address) {
         Seller seller = new Seller();
-        seller.setSellerUsername(username);
         seller.setSellerPassword(password);
         seller.setSellerEmail(email);
         seller.setSellerContact(contact);
@@ -126,7 +125,6 @@ public class SellerRepositoryTest {
     }
 
     private void assertSellerEquals(Seller expected, Seller actual) {
-        assertEquals(expected.getSellerUsername(), actual.getSellerUsername());
         assertEquals(expected.getSellerPassword(), actual.getSellerPassword());
         assertEquals(expected.getSellerEmail(), actual.getSellerEmail());
         assertEquals(expected.getSellerContact(), actual.getSellerContact());

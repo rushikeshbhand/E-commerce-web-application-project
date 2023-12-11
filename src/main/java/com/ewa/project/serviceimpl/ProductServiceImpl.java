@@ -31,6 +31,11 @@ public class ProductServiceImpl implements ProductService {
 		}
 		return productConverter.convertToProductDto(product);
 	}
+	
+    @Override
+    public List<Product> searchProductsByName(String productName) {
+        return productRepository.findByProductNameContainingIgnoreCase(productName);
+    }
 
 	@Override //creating product and returning product dto 
 	public ProductDto createProduct(ProductDto productDto) {
@@ -53,6 +58,16 @@ public class ProductServiceImpl implements ProductService {
 		Product updatedProduct = productRepository.save(existingProduct);
 		return productConverter.convertToProductDto(updatedProduct);
 	}
+	
+	// Add a new method for deleting by name
+	public void deleteProductByName(String productName) {
+	  Product product = productRepository.findByProductName(productName);
+	  if (product == null) {
+	    throw new ProductNotFoundException("Product not found with productName: " + productName);
+	  }
+	  productRepository.delete(product);
+	}
+
 
 	@Override //deleting the product
 	public String deleteProduct(Long productId) {

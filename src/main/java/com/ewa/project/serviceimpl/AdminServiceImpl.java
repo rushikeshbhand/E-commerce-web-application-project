@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.ewa.project.converter.AdminConverter;
 import com.ewa.project.dao.AdminRepository;
 import com.ewa.project.entity.Admin;
+import com.ewa.project.exception.AdminNotFoundException;
 import com.ewa.project.model.AdminDto;
 
 @Service
@@ -28,7 +29,18 @@ public class AdminServiceImpl implements AdminService {
 		admin = adminRepository.save(admin);
 		return adminConverter.convertToAdminDto(admin);
 	}
+	
+	@Override
+    public AdminDto authenticateAdmin(String email, String password) {
+        Admin admin = adminRepository.findByAdminEmailAndAdminPassword(email, password);
 
+        if (admin == null) {
+            throw new AdminNotFoundException("Invalid email or password");
+        }
+
+        return adminConverter.convertToAdminDto(admin);
+    }
+	
 	@Override //getting admin by its id
 	public AdminDto getAdminById(Long adminId) {
 		Admin admin = adminRepository.findById(adminId).orElse(null);
@@ -60,5 +72,4 @@ public class AdminServiceImpl implements AdminService {
 
 		return adminDtos;
 	}
-
 }

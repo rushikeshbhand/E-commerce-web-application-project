@@ -37,6 +37,15 @@ public class CustomerServiceImpl implements CustomerService {
         return customerConverter.convertToCustomerDto(customer);
     }
 
+    @Override
+    public CustomerDto authenticateCustomer(String email, String password) {
+        Customer customer = customerRepository.findByCustomerEmailAndCustomerPassword(email, password);
+        if (customer == null) {
+            throw new RuntimeException("Invalid credentials");
+        }
+        return customerConverter.convertToCustomerDto(customer);
+    }
+    
     @Override //updating cutomer by passing cusotmer id as input
     public CustomerDto updateCustomer(Long customerId, CustomerDto customerDto) {
         Customer existingCustomer = customerRepository.findByCustomerId(customerId);
@@ -63,6 +72,16 @@ public class CustomerServiceImpl implements CustomerService {
         }
         customerRepository.delete(customer);
         return "Customer with ID " + customerId + " has been deleted successfully.";
+    }
+    
+    @Override
+    public String deleteCustomerByEmail(String email) {
+        Customer customer = customerRepository.findByCustomerEmail(email);
+        if (customer == null) {
+            throw new RuntimeException("Customer not found with email: " + email);
+        }
+        customerRepository.delete(customer);
+        return "Customer with email " + email + " has been deleted successfully.";
     }
 
     @Override

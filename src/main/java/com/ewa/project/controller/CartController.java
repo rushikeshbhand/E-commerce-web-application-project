@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.*;
 import com.ewa.project.model.CartDto;
 import com.ewa.project.service.CartService;
 
+
 @RestController // The @RestController annotation indicates that this class is a spring MVC
 				// controller responsible for handling HTTP requests and returning data as
 				// response
 @RequestMapping("/api/carts") // The @RequestMapping annotation sets the starting address ("/api/carts") for
-								// all the operations this controller handle and any operations in this class
-								// will be based on this address
+@CrossOrigin("http://localhost:4200")						// will be based on this address
 public class CartController {
 
 	@Autowired // Automatically inject an object of CartService

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,8 +22,7 @@ import com.ewa.project.service.PaymentService;
 				// controller responsible for handling HTTP requests and returning data as
 				// response
 @RequestMapping("/api/payments") // The @RequestMapping annotation sets the starting address ("/api/payments")
-									// for all the operations this controller handle and any operations in this
-									// class will be based on this address
+@CrossOrigin("http://localhost:4200")						// class will be based on this address
 public class PaymentController {
 
 	@Autowired // automatically inject object of payment service

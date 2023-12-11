@@ -17,7 +17,7 @@ import javax.validation.Valid;
 				// response
 @RequestMapping("/api/orders") // The @RequestMapping annotation sets the starting address ("/api/orders") for
 								// all the operations this controller handle and any operations in this class
-								// will be based on this address
+@CrossOrigin("http://localhost:4200")				// will be based on this address
 public class OrderController {
 
 	@Autowired // automatically inject object of order service

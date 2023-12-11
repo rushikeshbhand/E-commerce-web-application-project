@@ -25,7 +25,6 @@ public class AdminRepositoryTest {
     public void testCreateAdmin() {
         // Create and save an admin
         Admin admin = new Admin();
-        admin.setAdminUsername("rushi");
         admin.setAdminPassword("password123");
         admin.setAdminEmail("rushi@gmail.com");
         admin.setAdminContact("7720917260");
@@ -36,7 +35,7 @@ public class AdminRepositoryTest {
 
     @Test
     public void testGetAllAdmins() {
-        // Clear the database to ensure a clean state
+        
         adminRepository.deleteAll();
 
         // Create and save multiple admin entities
@@ -68,7 +67,6 @@ public class AdminRepositoryTest {
         // Assert that the retrieved admin is not null and has the correct ID
         assertNotNull(retrievedAdmin);
         assertEquals(admin.getAdminId(), retrievedAdmin.getAdminId());
-        assertEquals("rohit", retrievedAdmin.getAdminUsername());
         assertEquals("password3", retrievedAdmin.getAdminPassword());
         assertEquals("rohit@gmail.com", retrievedAdmin.getAdminEmail());
         assertEquals("1234567890", retrievedAdmin.getAdminContact());
@@ -86,7 +84,6 @@ public class AdminRepositoryTest {
         assertNotNull(updatedAdmin);
 
         // Modify the admin's attributes
-        updatedAdmin.setAdminUsername("vishal"); // Update username
         updatedAdmin.setAdminPassword("newPassword1"); // Update password
         updatedAdmin.setAdminEmail("vishal@gmail.com"); // Update email
         updatedAdmin.setAdminContact("9876543210"); // Update contact number
@@ -99,7 +96,6 @@ public class AdminRepositoryTest {
         assertNotNull(retrievedAdmin);
 
         // Assert that the attributes have been updated
-        assertEquals("vishal", retrievedAdmin.getAdminUsername());
         assertEquals("newPassword1", retrievedAdmin.getAdminPassword());
         assertEquals("vishal@gmail.com", retrievedAdmin.getAdminEmail());
         assertEquals("9876543210", retrievedAdmin.getAdminContact());

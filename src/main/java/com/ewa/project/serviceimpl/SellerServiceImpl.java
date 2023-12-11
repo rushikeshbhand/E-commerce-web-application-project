@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.ewa.project.converter.SellerConverter;
 import com.ewa.project.dao.SellerRepository;
 import com.ewa.project.entity.Seller;
+import com.ewa.project.exception.SellerNotFoundException;
 import com.ewa.project.model.SellerDto;
 import com.ewa.project.service.SellerService;
 
@@ -25,6 +26,17 @@ public class SellerServiceImpl implements SellerService {
     public SellerDto createSeller(SellerDto sellerDto) {
         Seller seller = sellerConverter.convertToSellerEntity(sellerDto);
         seller = sellerRepository.save(seller);
+        return sellerConverter.convertToSellerDto(seller);
+    }
+    
+    @Override
+    public SellerDto authenticateSeller(String email, String password) {
+        Seller seller = sellerRepository.findBySellerEmailAndSellerPassword(email, password);
+
+        if (seller == null) {
+            throw new SellerNotFoundException("Invalid email or password");
+        }
+
         return sellerConverter.convertToSellerDto(seller);
     }
  
@@ -58,5 +70,15 @@ public class SellerServiceImpl implements SellerService {
         }
 
         return sellerDtos;
+    }
+    
+    @Override
+    public String deleteSellerByEmail(String email) {
+        Seller seller = sellerRepository.findBySellerEmail(email);
+        if (seller == null) {
+            throw new SellerNotFoundException("Seller not found with email: " + email);
+        }
+        sellerRepository.delete(seller);
+        return "Seller with email " + email + " has been deleted successfully.";
     }
 }

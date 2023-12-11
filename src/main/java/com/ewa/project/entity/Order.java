@@ -11,12 +11,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
-<<<<<<< HEAD
-=======
-import lombok.NoArgsConstructor;
-
-@NoArgsConstructor
->>>>>>> origin/main
 @Entity
 @Table(name = "order_details")
 public class Order {
@@ -34,25 +28,17 @@ public class Order {
 
 	@Column(name = "order_total_price")
 	private double orderTotalPrice;
-<<<<<<< HEAD
 
 	// Relationships
 
 	@OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
-=======
-	
-	// Relationships
-	
-	@OneToOne(mappedBy = "order", cascade= CascadeType.ALL)
->>>>>>> origin/main
 	private Cart cart;
 
 	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "payment_id") // Name of the foreign key column in the order table
 	private Payment payment;
-<<<<<<< HEAD
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "customer_id") // Name of the foreign key column in the order table
 	private Customer customer;
 
@@ -77,13 +63,6 @@ public class Order {
 
 	// getter and setter
 
-=======
-	
-	@OneToOne
-	@JoinColumn(name = "customer_id") // Name of the foreign key column in the order table
-	private Customer customer;
-	
->>>>>>> origin/main
 	public Customer getCustomer() {
 		return customer;
 	}
@@ -91,11 +70,6 @@ public class Order {
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
-<<<<<<< HEAD
-=======
-	
-	// getter and setter
->>>>>>> origin/main
 
 	public Long getOrderId() {
 		return orderId;
