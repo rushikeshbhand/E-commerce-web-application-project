@@ -14,4 +14,6 @@ public interface AdminService { //this are the method for actual business logic 
     AdminDto updateAdmin(Long adminId, AdminDto adminDto);
     
     String deleteAdmin(Long adminId);
+
+	AdminDto authenticateAdmin(String email, String password);
 }

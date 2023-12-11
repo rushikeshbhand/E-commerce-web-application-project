@@ -1,5 +1,6 @@
 package com.ewa.project.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,9 +12,6 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-import lombok.NoArgsConstructor;
-
-@NoArgsConstructor
 @Entity
 @Table(name = "customer_details")
 public class Customer {
@@ -50,8 +48,33 @@ public class Customer {
 
 	// Relationships
 //	, referencedColumnName = "cart_id"
-	@OneToOne(mappedBy = "customer")
+	@OneToOne(mappedBy = "customer", cascade = CascadeType.ALL)
 	private Cart cart;
+
+	// All argument constructor
+
+	public Customer(Long customerId, @NotBlank String customerFirstName, @NotBlank String customerLastName,
+			@NotBlank @Email String customerEmail,
+			@NotBlank @Size(min = 6, max = 20, message = "Password must be between 6 to 20 characters") String customerPassword,
+			String customerAddress,
+			@NotBlank @Size(min = 10, max = 10, message = "Contact number must have exactly 10 Numbers") String customerPhoneNo,
+			Cart cart) {
+		super();
+		this.customerId = customerId;
+		this.customerFirstName = customerFirstName;
+		this.customerLastName = customerLastName;
+		this.customerEmail = customerEmail;
+		this.customerPassword = customerPassword;
+		this.customerAddress = customerAddress;
+		this.customerPhoneNo = customerPhoneNo;
+		this.cart = cart;
+	}
+
+	// No argument constructor
+	public Customer() {
+		super();
+	}
+
 	// getter and setter
 
 	public Long getCustomerId() {

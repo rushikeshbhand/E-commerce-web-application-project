@@ -1,6 +1,5 @@
 package com.ewa.project.converter;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
 import com.ewa.project.entity.Admin;
@@ -13,7 +12,10 @@ public class AdminConverter {
     public Admin convertToAdminEntity(AdminDto adminDto) {
         Admin admin = new Admin();
         if (adminDto != null) {
-            BeanUtils.copyProperties(adminDto, admin);
+        	admin.setAdminId(adminDto.getAdminId());
+            admin.setAdminPassword(adminDto.getAdminPassword());
+            admin.setAdminEmail(adminDto.getAdminEmail());
+            admin.setAdminContact(adminDto.getAdminContact());
         }
         return admin;
     }
@@ -22,7 +24,10 @@ public class AdminConverter {
     public AdminDto convertToAdminDto(Admin admin) {
         AdminDto adminDto = new AdminDto();
         if (admin != null) {
-            BeanUtils.copyProperties(admin, adminDto);
+        	adminDto.setAdminId(admin.getAdminId());
+            adminDto.setAdminPassword(admin.getAdminPassword());
+            adminDto.setAdminEmail(admin.getAdminEmail());
+            adminDto.setAdminContact(admin.getAdminContact());
         }
         return adminDto;
     }

@@ -7,5 +7,7 @@ import com.ewa.project.entity.Customer;
 @Repository // Indicates that this interface is a Spring Data repository
 public interface CustomerRepository extends JpaRepository<Customer, Long> {// It provides methods for common CRUD operations
 
-    Customer findByCustomerId(Long customerId);
+	Customer findByCustomerEmailAndCustomerPassword(String customerEmail, String customerPassword);
+	Customer findByCustomerId(Long customerId);
+	Customer findByCustomerEmail(String email);
 }

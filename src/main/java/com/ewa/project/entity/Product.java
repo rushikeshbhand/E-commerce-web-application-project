@@ -1,5 +1,6 @@
 package com.ewa.project.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,25 +10,25 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
-import lombok.NoArgsConstructor;
-
-@NoArgsConstructor
 @Entity
 @Table(name = "Product_Details")
 public class Product {
+	
 	@Id
 	@Column(name = "product_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long productId;
 
-	@NotBlank
+	@NotBlank(message="product name should not be blank")
 	@Column(name = "product_name")
 	private String productName;
 
 	@Column(name = "product_description")
 	private String productDescription;
 
+	@NotNull(message="product price should not be null")
 	@Column(name = "product_price")
 	private double productPrice;
 
@@ -41,18 +42,42 @@ public class Product {
 	private String productBrand;
 
 	// relationships
-	@ManyToOne
-    @JoinColumn(name = "cart_id") // This is the foreign key column in the products table
-    private Cart cart;
-	
-	@ManyToOne
-    @JoinColumn(name = "category_id") // This is the foreign key column in the products table
-    private Category category;
-	
-	@ManyToOne
-    @JoinColumn(name = "seller_id") // This is the foreign key column in the products table
-    private Seller seller;
-	
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "cart_id") // This is the foreign key column in the products table
+	private Cart cart;
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "category_id") // This is the foreign key column in the products table
+	private Category category;
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "seller_id") // This is the foreign key column in the products table
+	private Seller seller;
+
+	// All argument constructor
+	public Product(Long productId, @NotBlank(message = "product name should not be blank") String productName,
+			String productDescription, @NotNull(message = "product price should not be null") double productPrice,
+			String productImage, String productSpecification, String productBrand, Cart cart, Category category,
+			Seller seller) {
+		super();
+		this.productId = productId;
+		this.productName = productName;
+		this.productDescription = productDescription;
+		this.productPrice = productPrice;
+		this.productImage = productImage;
+		this.productSpecification = productSpecification;
+		this.productBrand = productBrand;
+		this.cart = cart;
+		this.category = category;
+		this.seller = seller;
+	}
+
+
+	// No argument constructor
+	public Product() {
+		super();
+	}
+
 	// getter and setter
 
 	public Cart getCart() {
@@ -62,7 +87,6 @@ public class Product {
 	public Seller getSeller() {
 		return seller;
 	}
-
 
 	public void setSeller(Seller seller) {
 		this.seller = seller;

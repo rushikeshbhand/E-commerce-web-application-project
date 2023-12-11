@@ -1,10 +1,6 @@
 package com.ewa.project.model;
 
-import java.util.List;
-
 import javax.validation.constraints.NotBlank;
-
-import com.ewa.project.entity.Product;
 
 public class CategoryDto {
 
@@ -13,17 +9,7 @@ public class CategoryDto {
 	@NotBlank
 	private String categoryName;
 	
-	public List<Product> getProduct() {
-		return product;
-	}
-
-	public void setProduct(List<Product> product) {
-		this.product = product;
-	}
-
-	private List<Product> product;
-
-
+	//getters and setters
 	public Long getCategoryId() {
 		return categoryId;
 	}

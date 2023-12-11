@@ -10,8 +10,12 @@ public class SellerDto {
     private Long sellerId;
 
     @NotBlank
-    @Column(name = "seller_username")
-    private String sellerUsername;
+    @Column(name = "seller_first_name")
+    private String sellerFirstName;
+    
+    @NotBlank
+    @Column(name = "seller_last_name")
+    private String sellerLastName;
 
     @NotBlank
     @Size(min = 6, max = 20, message = "Password must be between 6 to 20 characters")
@@ -38,20 +42,28 @@ public class SellerDto {
 		this.sellerId = sellerId;
 	}
 
-	public String getSellerUsername() {
-		return sellerUsername;
-	}
-
-	public void setSellerUsername(String sellerUsername) {
-		this.sellerUsername = sellerUsername;
-	}
-
 	public String getSellerPassword() {
 		return sellerPassword;
 	}
 
 	public void setSellerPassword(String sellerPassword) {
 		this.sellerPassword = sellerPassword;
+	}
+	
+	public String getSellerFirstName() {
+		return sellerFirstName;
+	}
+
+	public void setSellerFirstName(String sellerFirstName) {
+		this.sellerFirstName = sellerFirstName;
+	}
+
+	public String getSellerLastName() {
+		return sellerLastName;
+	}
+
+	public void setSellerLastName(String sellerLastName) {
+		this.sellerLastName = sellerLastName;
 	}
 
 	public String getSellerEmail() {
@@ -77,5 +89,4 @@ public class SellerDto {
 	public void setSellerAddress(String sellerAddress) {
 		this.sellerAddress = sellerAddress;
 	}
-	
 }

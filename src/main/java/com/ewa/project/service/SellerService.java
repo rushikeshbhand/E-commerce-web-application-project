@@ -14,4 +14,8 @@ public interface SellerService {
     SellerDto updateSeller(Long sellerId, SellerDto sellerDto);
     
     String deleteSeller(Long sellerId);
+
+	SellerDto authenticateSeller(String email, String password);
+
+	String deleteSellerByEmail(String email);
 }

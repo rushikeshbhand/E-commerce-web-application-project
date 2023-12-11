@@ -8,9 +8,6 @@ public class AdminDto {
 
 	private Long adminId;
 
-	@NotBlank(message = "Enter admins username")
-	private String adminUsername;
-
 	@NotBlank(message = "Enter valid password")
 	private String adminPassword;
 
@@ -30,14 +27,6 @@ public class AdminDto {
 
 	public void setAdminId(Long adminId) {
 		this.adminId = adminId;
-	}
-
-	public String getAdminUsername() {
-		return adminUsername;
-	}
-
-	public void setAdminUsername(String adminUsername) {
-		this.adminUsername = adminUsername;
 	}
 
 	public String getAdminPassword() {

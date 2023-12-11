@@ -1,8 +1,10 @@
 package com.ewa.project.model;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import com.ewa.project.entity.Cart;
+import com.ewa.project.entity.Category;
 import com.ewa.project.entity.Seller;
 
 public class ProductDto {
@@ -15,7 +17,7 @@ public class ProductDto {
 	@NotBlank
 	private String productDescription;
 
-	@NotBlank
+	@NotNull
 	private double productPrice;
 
 	@NotBlank
@@ -28,8 +30,10 @@ public class ProductDto {
 	private String productBrand;
 
 	// Relationships
+	
 	private Cart cart;
-	private Seller seller;
+	private Seller seller;	
+	private Category category;
 	
 	// getter and setter
 	public Seller getSeller() {
@@ -102,6 +106,14 @@ public class ProductDto {
 
 	public void setProductBrand(String productBrand) {
 		this.productBrand = productBrand;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 
 }

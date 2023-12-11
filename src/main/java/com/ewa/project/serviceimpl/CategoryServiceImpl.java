@@ -50,18 +50,32 @@ public class CategoryServiceImpl implements CategoryService {
         }
         return categoryConverter.entityToDto(category);
     }
-
-    @Override //updating category by by passing category id and if category is not found then category not found will print as a output
+    
+    @Override
     public CategoryDto updateCategory(Long categoryId, CategoryDto categoryDto) {
         Category existingCategory = categoryRepository.findByCategoryId(categoryId);
-        if (existingCategory == null) {
-            throw new RuntimeException("Category not found with ID: " + categoryId);
+        if (existingCategory != null) {
+            // Update category name only
+            existingCategory.setCategoryName(categoryDto.getCategoryName());
+
+            Category updatedCategory = categoryRepository.save(existingCategory);
+            return categoryConverter.entityToDto(updatedCategory);
+        } else {
+            return null; // Category not found
         }
-        Category updatedCategory = categoryConverter.dtoToEntity(categoryDto);
-        updatedCategory.setCategoryId(existingCategory.getCategoryId());
-        categoryRepository.save(updatedCategory);
-        return categoryConverter.entityToDto(updatedCategory);
     }
+
+//    @Override //updating category by by passing category id and if category is not found then category not found will print as a output
+//    public CategoryDto updateCategory(Long categoryId, CategoryDto categoryDto) {
+//        Category existingCategory = categoryRepository.findByCategoryId(categoryId);
+//        if (existingCategory == null) {
+//            throw new RuntimeException("Category not found with ID: " + categoryId);
+//        }
+//        Category updatedCategory = categoryConverter.dtoToEntity(categoryDto);
+//        updatedCategory.setCategoryId(existingCategory.getCategoryId());
+//        categoryRepository.save(updatedCategory);
+//        return categoryConverter.entityToDto(updatedCategory);
+//    }
 
     @Override
     public String deleteCategory(Long categoryId) { //deleting category by passing category id and if category not found then category not found message will print as output
